@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+// @flow
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchBox from '../components/SearchBox';
 import Triangle from '../components/Triangle';
@@ -56,17 +57,27 @@ export default function FrontPage() {
       .then(console.log);
   }, []);
 
+  const [connectedToIPFS, setConnectToIPFS] = useState(false);
   useEffect(() => {
     const handle = setInterval(() => {
       fetch('/ipfsapi/swarmpeers')
         .then(res => res.json())
-        .then(console.log);
+        .then((peers: string[]) => {
+          if (peers.length === 0) {
+            setConnectToIPFS(false);
+          } else {
+            setConnectToIPFS(true);
+          }
+        });
     }, 1000);
     return () => clearInterval(handle);
   }, []);
   return (
     <Container>
-      <Title>E-Hentai Galleries: The Free Hentai Doujinshi, Manga and Image Gallery System</Title>
+      <Title>
+        E-Hentai Galleries: The Free Hentai Doujinshi, Manga and Image Gallery System{' '}
+        ({connectedToIPFS ? 'Connected to IPFS' : 'Connecting IPFS ...'})
+      </Title>
 
       {/* 搜索模块 */}
       <SearchBox />
