@@ -1,0 +1,11 @@
+{
+  "name": "rehentai",
+  "version": 2,
+  "routes": [
+    { "src": "/static/(.*)", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/static/$1" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/sw.js", "headers": { "cache-control": "s-maxage=0" }, "dest": "/sw.js" },
+    { "src": "/sw.js.map", "headers": { "cache-control": "s-maxage=0" }, "dest": "/sw.js.map" },
+    { "src": "/(.*)", "headers": { "cache-control": "s-maxage=0" }, "dest": "/index.html" }
+  ]
+}
