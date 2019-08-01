@@ -1,7 +1,5 @@
 {
-  "presets": [
-    "react-app"
-  ],
+  "presets": ["react-app"],
   "plugins": [
     "babel-plugin-styled-components",
     "babel-plugin-array-last-index",
@@ -9,6 +7,7 @@
     "@babel/plugin-proposal-do-expressions",
     "@babel/plugin-transform-react-inline-elements",
     "@babel/plugin-transform-react-constant-elements",
-    "babel-plugin-closure-elimination"
+    "babel-plugin-closure-elimination",
+    ["import", { "libraryName": "antd", "style": true }]
   ]
 }
