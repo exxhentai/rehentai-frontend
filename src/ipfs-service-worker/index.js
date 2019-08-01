@@ -164,12 +164,24 @@ self.addEventListener('install', event => {
   event.waitUntil(self.skipWaiting());
 });
 
+/** check if is gh-page deployed or localhost development */
+function isListenedRoute(event, route) {
+  return (
+    event.request.url.startsWith(`${packageJSON.homepage}${route}/`) ||
+    event.request.url.startsWith(`${self.location.origin}/${route}/`)
+  );
+}
+
 self.addEventListener('fetch', event => {
-  // gh-page deployed or localhost development
-  if (
-    event.request.url.startsWith(`${packageJSON.homepage}${ipfsRoute}/`) ||
-    event.request.url.startsWith(`${self.location.origin}/${ipfsRoute}/`)
-  ) {
+  if (isListenedRoute(event, 'ipfsapi')) {
+    return event.respondWith(
+      new Response('{ "aaa": true }', {
+        ...headerOK,
+        headers: { 'Content-Type': mimeTypes.contentType('json') },
+      }),
+    );
+  }
+  if (isListenedRoute(event, ipfsRoute)) {
     // 1. we will goto /${ipfsRoute}/multihash so this will be a multihash
     // 2. if returned file of that multihash is a HTML, it will request for other content
     // so this will be content name. We may had cached this file in 1, so subsequent request will hit the cache.

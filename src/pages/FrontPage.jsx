@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SearchBox from '../components/SearchBox';
 import Triangle from '../components/Triangle';
@@ -47,28 +47,31 @@ const LinkItem = ({ text }) => (
   </StyledLinkItem>
 );
 
-const FrontPage = () => (
-  <Container>
-    <Title>E-Hentai Galleries: The Free Hentai Doujinshi, Manga and Image Gallery System</Title>
+export default function FrontPage() {
+  useEffect(() => {
+    fetch('/ipfsapi/').then(res => res.json()).then(console.log)
+  }, [])
+  return (
+    <Container>
+      <Title>E-Hentai Galleries: The Free Hentai Doujinshi, Manga and Image Gallery System</Title>
 
-    {/* 搜索模块 */}
-    <SearchBox />
+      {/* 搜索模块 */}
+      <SearchBox />
 
-    <GalleryListThumbnailItem
-      title="test"
-      thumbnail="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9"
-      id="test"
-      createdTime="testtime"
-      type="Doujinshi"
-    />
+      <GalleryListThumbnailItem
+        title="test"
+        thumbnail="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9"
+        id="test"
+        createdTime="testtime"
+        type="Doujinshi"
+      />
 
-    <LinkWrapper>
-      <LinkItem text="Visit the E-Hentai Forums" />
-      <LinkItem text="E-Hentai @ Twitter" />
-      <LinkItem text="Play the HentaiVerse Minigame" />
-      <LinkItem text="Lo-Fi Version" />
-    </LinkWrapper>
-  </Container>
-);
-
-export default FrontPage;
+      <LinkWrapper>
+        <LinkItem text="Visit the E-Hentai Forums" />
+        <LinkItem text="E-Hentai @ Twitter" />
+        <LinkItem text="Play the HentaiVerse Minigame" />
+        <LinkItem text="Lo-Fi Version" />
+      </LinkWrapper>
+    </Container>
+  );
+}
