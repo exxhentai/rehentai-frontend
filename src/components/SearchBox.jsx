@@ -95,7 +95,8 @@ const ActionWrapper = styled.div`
 `;
 
 export default function SearchBox() {
-  const [tags, setTags] = useState([]);
+  // load available tags from server, so user can use tags easily
+  const [availableTags, setAvailableTags] = useState([]);
   useEffect(() => {
     // TODO: fetch this from server
     const fakeDataFromServer = {
@@ -103,12 +104,22 @@ export default function SearchBox() {
       character: ['tomoko kuroki'],
       femail: ['beauty mark', 'bikini', 'dark skin', 'anal'],
     };
-    setTags(
+    setAvailableTags(
       Object.keys(fakeDataFromServer).flatMap(tagCategory =>
         fakeDataFromServer[tagCategory].map(subTag => ({ value: `${tagCategory}:${subTag}`, label: subTag })),
       ),
     );
   }, []);
+
+  // selected tags, used for searching
+  const [selectedTags, setSelectedTags] = useState([]);
+  function search() {
+    console.log(`searching ${JSON.stringify(selectedTags)}`);
+  }
+  function clearFilters() {
+    setSelectedTags([]);
+  }
+
   return (
     <Wrapper>
       <TagWrapper>
@@ -122,19 +133,18 @@ export default function SearchBox() {
           mode="tags"
           style={{ width: '100%' }}
           placeholder="select tags"
-          onChange={value => {
-            console.log(`selected ${value}`);
-          }}
+          onChange={setSelectedTags}
           optionLabelProp="label"
+          value={selectedTags}
         >
-          {tags.map(({ value, label }) => (
+          {availableTags.map(({ value, label }) => (
             <Select.Option value={value} label={label}>
               {value}
             </Select.Option>
           ))}
         </Input>
-        <Button>Apply Filter</Button>
-        <Button>Clear Filter</Button>
+        <Button onClick={search}>Apply Filter</Button>
+        <Button onClick={clearFilters}>Clear Filter</Button>
       </InputWrapper>
 
       <ActionWrapper>
