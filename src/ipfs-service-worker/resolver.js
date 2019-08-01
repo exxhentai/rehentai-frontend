@@ -85,6 +85,8 @@ export const resolveMultihash = promisify((ipfs, path, callback) => {
         return callback(error);
       }
 
+      console.log(`ipfs.files.stat(/ipfs/${path}`);
+      
       ipfs.files.stat(`/ipfs/${path}`, (fileStatErr, stats) => {
         if (fileStatErr) {
           return callback(fileStatErr);

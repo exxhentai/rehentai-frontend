@@ -49,8 +49,21 @@ const LinkItem = ({ text }) => (
 
 export default function FrontPage() {
   useEffect(() => {
-    fetch('/ipfsapi/').then(res => res.json()).then(console.log)
-  }, [])
+    fetch(
+      '/ipfsapi/swarmconnect?address=/dns4/lon-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3',
+    )
+      .then(res => res.json())
+      .then(console.log);
+  }, []);
+
+  useEffect(() => {
+    const handle = setInterval(() => {
+      fetch('/ipfsapi/swarmpeers')
+        .then(res => res.json())
+        .then(console.log);
+    }, 1000);
+    return () => clearInterval(handle);
+  }, []);
   return (
     <Container>
       <Title>E-Hentai Galleries: The Free Hentai Doujinshi, Manga and Image Gallery System</Title>
