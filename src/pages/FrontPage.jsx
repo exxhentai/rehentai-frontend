@@ -51,6 +51,8 @@ const FrontPage = () => (
     {/* 搜索模块 */}
     <SearchBox />
 
+    <img src="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9" />
+
     <LinkWrapper>
       <LinkItem text="Visit the E-Hentai Forums" />
       <LinkItem text="E-Hentai @ Twitter" />
