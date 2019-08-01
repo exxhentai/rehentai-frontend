@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import SearchBox from '../components/SearchBox';
 import Triangle from '../components/Triangle';
 import ClickableText from '../components/ClickableText';
+import GalleryListThumbnailItem from '../components/GalleryListThumbnailItem';
 
 const Container = styled.div`
   margin: 10px auto;
   padding: 5px;
   max-width: 1200px;
   min-width: 740px;
-  border: 1px solid #5C0D12;
+  border: 1px solid #5c0d12;
   border-radius: 9px;
-  background: #EDEBDF;
+  background: #edebdf;
 `;
 
 const Title = styled.p`
@@ -31,8 +32,8 @@ const LinkWrapper = styled.div`
 const StyledLinkItem = styled.div`
   display: flex;
   align-items: center;
-  
-  &>p {
+
+  & > p {
     margin-right: 10px;
   }
 `;
@@ -40,7 +41,9 @@ const StyledLinkItem = styled.div`
 const LinkItem = ({ text }) => (
   <StyledLinkItem>
     <Triangle />
-    <ClickableText fontSize={10} underline>{text}</ClickableText>
+    <ClickableText fontSize={10} underline>
+      {text}
+    </ClickableText>
   </StyledLinkItem>
 );
 
@@ -51,7 +54,13 @@ const FrontPage = () => (
     {/* 搜索模块 */}
     <SearchBox />
 
-    <img src="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9" />
+    <GalleryListThumbnailItem
+      title="test"
+      thumbnail="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9"
+      id="test"
+      createdTime="testtime"
+      type="Doujinshi"
+    />
 
     <LinkWrapper>
       <LinkItem text="Visit the E-Hentai Forums" />
