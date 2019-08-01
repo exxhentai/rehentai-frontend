@@ -1,0 +1,31 @@
+// @flow
+import promisify from 'promisify-es6';
+import mimeTypes from 'mime-types';
+
+import { getReadyNode } from './ipfs';
+import { headerOK, headerError } from './headers';
+
+export async function swarmConnect(peerAddress: string) {
+  const ipfs = await getReadyNode();
+  try {
+    await promisify(ipfs.swarm.connect)(peerAddress);
+    return new Response(JSON.stringify({ aaa: peerAddress }), {
+      ...headerOK,
+      headers: { 'Content-Type': mimeTypes.contentType('json') },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error, message: error.message }), {
+      ...headerError,
+      headers: { 'Content-Type': mimeTypes.contentType('json') },
+    });
+  }
+}
+
+export async function swarmList() {
+  const ipfs = await getReadyNode();
+  const peers = await promisify(ipfs.swarm.peers)();
+  return new Response(JSON.stringify(peers), {
+    ...headerOK,
+    headers: { 'Content-Type': mimeTypes.contentType('json') },
+  });
+}
