@@ -96,7 +96,7 @@ const ActionWrapper = styled.div`
 
 export default function SearchBox() {
   // load available tags from server, so user can use tags easily
-  const [availableTags, setAvailableTags] = useState([]);
+  const [availableTags, setAvailableTags] = useState({});
   useEffect(() => {
     // TODO: fetch this from server
     const fakeDataFromServer = {
@@ -104,11 +104,7 @@ export default function SearchBox() {
       character: ['tomoko kuroki'],
       femail: ['beauty mark', 'bikini', 'dark skin', 'anal'],
     };
-    setAvailableTags(
-      Object.keys(fakeDataFromServer).flatMap(tagCategory =>
-        fakeDataFromServer[tagCategory].map(subTag => ({ value: `${tagCategory}:${subTag}`, label: subTag })),
-      ),
-    );
+    setAvailableTags(fakeDataFromServer);
   }, []);
 
   // selected tags, used for searching
@@ -137,10 +133,14 @@ export default function SearchBox() {
           optionLabelProp="label"
           value={selectedTags}
         >
-          {availableTags.map(({ value, label }) => (
-            <Select.Option value={value} label={label}>
-              {value}
-            </Select.Option>
+          {Object.keys(availableTags).map(tagGroupName => (
+            <Select.OptGroup label={tagGroupName}>
+              {availableTags[tagGroupName].map(tagName => (
+                <Select.Option value={`${tagGroupName}:${tagName}`} label={tagName}>
+                  {`${tagGroupName}:${tagName}`}
+                </Select.Option>
+              ))}
+            </Select.OptGroup>
           ))}
         </Input>
         <Button onClick={search}>Apply Filter</Button>
