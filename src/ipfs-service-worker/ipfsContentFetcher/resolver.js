@@ -42,11 +42,12 @@ export default function renderFolder(path, links) {
   };
 }
 
-export const resolveMultihash = promisify((ipfs, path, callback) => {
+export const resolveMultihash = promisify((ipfs, path, timing, callback) => {
   const parts = splitPath(path);
   const firstMultihash = parts.shift();
   let currentCid;
 
+  const ipfsPathCheckingTimer = timing.startTimer("2.Checking path sanity");
   return async.reduce(
     parts,
     firstMultihash,
@@ -87,6 +88,7 @@ export const resolveMultihash = promisify((ipfs, path, callback) => {
     },
     // check if last part of hash is a directory
     (err, result) => {
+      ipfsPathCheckingTimer.stop();
       if (err) {
         return callback(err);
       }
@@ -98,9 +100,9 @@ export const resolveMultihash = promisify((ipfs, path, callback) => {
         return callback(error);
       }
 
-      console.log(`ipfs.files.stat(/ipfs/${path}`);
-
+      const ipfsFileStatTimer = timing.startTimer(`3.ipfs.files.stat ${path}`);
       ipfs.files.stat(`/ipfs/${path}`, (fileStatErr, stats) => {
+        ipfsFileStatTimer.stop();
         if (fileStatErr) {
           return callback(fileStatErr);
         }

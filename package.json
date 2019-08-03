@@ -6,6 +6,7 @@
     "@rescripts/rescript-env": "0.0.10",
     "antd": "^3.20.7",
     "async": "^3.1.0",
+    "browser-process-hrtime": "^1.0.0",
     "cids": "^0.7.1",
     "file-type": "^12.1.0",
     "filesize": "^4.1.2",
