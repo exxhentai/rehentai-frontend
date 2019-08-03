@@ -29,6 +29,23 @@ const MainContainer = styled.div`
 `;
 const Mainlistview = styled.table`
 `;
+const Mainlisthead = styled.tr`
+  background: #d6d5d0;
+`;
+const Listheadtag = styled.th`
+  width:12%;
+`;
+const ListPublished = styled.th`
+  width:12%;
+`;
+const ListTitle = styled.th`
+width:66%;
+`;
+const ListUploader = styled.th`
+  width:10%;
+`;
+
+
 const Mainlistviewtr = styled.tr`
 border:1px solid #000; 
   font-family: arial, helvetica, sans-serif;; 
@@ -76,7 +93,7 @@ const Gtdown = styled.div`
 const Title = styled.h3`
   color: #8f6063;
   overflow: hidden;
-  min-height: 32px;
+  min-height: 19px;
   max-height: 32px;
   line-height: 16px;
   margin: 6px 4px 0;
@@ -164,7 +181,11 @@ export default function GalleryListThumbnailItem({
       <a href={`/g/${id}`}>
         <Container>
           <Mainlistview>
+            <Mainlisthead>
+              <Listheadtag>Tag</Listheadtag><ListPublished>Published</ListPublished><ListTitle>Title</ListTitle><ListUploader>Uploader</ListUploader>
+              </Mainlisthead>
             <Mainlistviewtr>
+              
               <MainlistviewMetaDatas>
                 <MetaDatas>
                   <Tag type={type} />
