@@ -17,6 +17,30 @@ const Container = styled.div`
     background: #f2f0e4;
   }
 `;
+const MainContainer = styled.div`
+  margin: 10px auto;
+  /*padding: 10px;*/
+  max-width: 100%;
+  min-width: 200px;
+  border: 2px solid #5c0d12;
+  border-collapse: collapse;
+  /*border-radius: 0px;*/
+  background: #edebdf;
+`;
+const Mainlistview =styled.table`
+`;
+const Mainlistviewth = styled.td`
+border:1px solid #000; 
+  font-family: 微軟正黑體; 
+  font-size:16px; 
+  width:200px;
+  border:1px solid #000;
+  text-align:center;
+  border-collapse:collapse;
+`; 
+const Mainlistviewtd = styled.tr`
+  position: absolute;
+`;
 const Title = styled.h3`
   color: #8f6063;
   overflow: hidden;
@@ -30,6 +54,7 @@ const Title = styled.h3`
 const Thumbnail = styled.img`
   height: 228px;
   width: 250px;
+  display:none;
 `;
 const MetaDatas = styled.div`
   height: 46px;
@@ -42,7 +67,7 @@ const DateTime = styled.p`
   font-size: 8pt;
   font-family: arial, helvetica, sans-serif;
   color: #5c0d11;
-  position: absolute;
+  /*position: absolute;*/
   top: 27px;
   left: 3px;
   width: 102px;
@@ -51,7 +76,10 @@ const DateTime = styled.p`
   padding: 1px 0;
 `;
 
+
+
 export type GalleryListThumbnailItemProps = {
+  MainContainer: String,
   title: string,
   thumbnail: string,
   id: string,
@@ -77,15 +105,23 @@ export default function GalleryListThumbnailItem({
   createdTime,
 }: GalleryListThumbnailItemProps) {
   return (
+    <MainContainer>
     <a href={`/g/${id}`}>
       <Container>
-        <Title>{title}</Title>
-        <Thumbnail src={thumbnail} alt={title} />
+        <Mainlistview>
+          <Mainlistviewth>
         <MetaDatas>
           <Tag type={type} />
           <DateTime>{createdTime}</DateTime>
         </MetaDatas>
+        </Mainlistviewth>
+        <Mainlistviewtd>
+        <Title>{title}</Title>
+        <Thumbnail src={thumbnail} alt={title} />
+        </Mainlistviewtd>
+        </Mainlistview>
       </Container>
     </a>
+    </MainContainer>
   );
 }
