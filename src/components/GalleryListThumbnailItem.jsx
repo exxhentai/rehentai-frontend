@@ -7,7 +7,7 @@ const Container = styled.div`
   min-height: 200px;
   padding-bottom: 2px;
   min-width: 250px;
-  max-width: 400px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #d9d7cc;
@@ -27,19 +27,51 @@ const MainContainer = styled.div`
   /*border-radius: 0px;*/
   background: #edebdf;
 `;
-const Mainlistview =styled.table`
+const Mainlistview = styled.table`
 `;
-const Mainlistviewth = styled.td`
+const Mainlistviewtr = styled.tr`
 border:1px solid #000; 
-  font-family: 微軟正黑體; 
+  font-family: arial, helvetica, sans-serif;; 
   font-size:16px; 
   width:200px;
   border:1px solid #000;
   text-align:center;
   border-collapse:collapse;
-`; 
-const Mainlistviewtd = styled.tr`
-  position: absolute;
+`;
+const MainlistviewMetaDatas = styled.td`
+  /*position: absolute;*/
+  width:12%;
+`;
+const MainlistviewDateTime = styled.td`
+  /*position: absolute;*/
+  width:12%;
+`;
+const MainlistviewTitle = styled.td`
+  /*position: absolute;*/
+  width:66%;
+`;
+const MainlistviewUploader = styled.td`
+  /*position: absolute;*/
+  width:10%;
+`;
+const Dirdown = styled.div`
+`;
+const Dirstar = styled.div`
+  width: 80px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-image: url(https://ehgt.org/g/rt.png);
+  float: left;
+`;
+const Gtdown = styled.div`
+  /*position: absolute;*/
+  left: 99px;
+  top: 25px;
+  height: 15px;
+  width: 15px;
+  background-image: url(https://ehgt.org/g/t.png);
+  float: left;
+  margin-left: 10px;
 `;
 const Title = styled.h3`
   color: #8f6063;
@@ -48,8 +80,8 @@ const Title = styled.h3`
   max-height: 32px;
   line-height: 16px;
   margin: 6px 4px 0;
-  font-size: 10pt;
-  text-align: center;
+  font-size: 13pt;
+  text-align: left;
 `;
 const Thumbnail = styled.img`
   height: 228px;
@@ -63,6 +95,27 @@ const MetaDatas = styled.div`
   flex-direction: row;
   justify-content: center;
 `;
+const Comicname = styled.div`
+`;
+const Comictag = styled.div`
+    float: left;
+    font-weight: bold;
+    padding: 1px 4px;
+    margin: 0 2px 5px 2px;
+    
+    border-radius: 5px;
+    border: 1px solid #806769;
+    background: #F2EFDF;
+    opacity:0.75;
+        height: 20px;
+    min-width: 20px;
+    max-width: 780px;
+    overflow: hidden;
+        font-size: 9pt;
+    
+`;
+const DateTimeDiv = styled.div`
+`;
 const DateTime = styled.p`
   font-size: 8pt;
   font-family: arial, helvetica, sans-serif;
@@ -75,8 +128,9 @@ const DateTime = styled.p`
   white-space: nowrap;
   padding: 1px 0;
 `;
-
-
+const Uploader = styled.p`
+font-size:10px;
+`;
 
 export type GalleryListThumbnailItemProps = {
   MainContainer: String,
@@ -85,16 +139,17 @@ export type GalleryListThumbnailItemProps = {
   id: string,
   createdTime: string,
   type:
-    | 'Doujinshi'
-    | 'Manga'
-    | 'Artist CG'
-    | 'Game CG'
-    | 'Western'
-    | 'Non-H'
-    | 'Image Set'
-    | 'Cosplay'
-    | 'Asian Porn'
-    | 'Misc',
+  | 'Doujinshi'
+  | 'Manga'
+  | 'Artist CG'
+  | 'Game CG'
+  | 'Western'
+  | 'Non-H'
+  | 'Image Set'
+  | 'Cosplay'
+  | 'Asian Porn'
+  | 'Misc',
+  Uploader: String,
 };
 
 export default function GalleryListThumbnailItem({
@@ -106,22 +161,41 @@ export default function GalleryListThumbnailItem({
 }: GalleryListThumbnailItemProps) {
   return (
     <MainContainer>
-    <a href={`/g/${id}`}>
-      <Container>
-        <Mainlistview>
-          <Mainlistviewth>
-        <MetaDatas>
-          <Tag type={type} />
-          <DateTime>{createdTime}</DateTime>
-        </MetaDatas>
-        </Mainlistviewth>
-        <Mainlistviewtd>
-        <Title>{title}</Title>
-        <Thumbnail src={thumbnail} alt={title} />
-        </Mainlistviewtd>
-        </Mainlistview>
-      </Container>
-    </a>
+      <a href={`/g/${id}`}>
+        <Container>
+          <Mainlistview>
+            <Mainlistviewtr>
+              <MainlistviewMetaDatas>
+                <MetaDatas>
+                  <Tag type={type} />
+                </MetaDatas>
+              </MainlistviewMetaDatas>
+              <MainlistviewDateTime>
+                <DateTimeDiv>
+                  <DateTime>{createdTime}</DateTime>
+                </DateTimeDiv>
+                <Dirdown>
+                <Dirstar></Dirstar>
+                <Gtdown></Gtdown>
+                </Dirdown>
+              </MainlistviewDateTime>
+
+              <MainlistviewTitle>
+                <Comicname>
+                  <Title>{title}</Title>
+                </Comicname>
+                <Thumbnail src={thumbnail} alt={title} />
+                <Comictag>
+                  {id}
+                </Comictag>
+              </MainlistviewTitle>
+              <MainlistviewUploader>
+                <Uploader>{id}</Uploader>
+              </MainlistviewUploader>
+            </Mainlistviewtr>
+          </Mainlistview>
+        </Container>
+      </a>
     </MainContainer>
   );
 }

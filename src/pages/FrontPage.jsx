@@ -83,11 +83,13 @@ export default function FrontPage() {
       <SearchBox />
 
       <GalleryListThumbnailItem
-        title="test"
+        title="[Yutakame] Remains of warriors nightmare [English] [Kimochi-san]"
         thumbnail="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9"
-        id="test"
-        createdTime="testtime"
+        id="testid"
+        createdTime="2019-08-03 15:50"
         type="Doujinshi"
+        Uploader="exxhentaiUploader"
+        comictag="40010"
       />
 
       <LinkWrapper>

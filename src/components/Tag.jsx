@@ -20,7 +20,7 @@ const StyledTag = styled.div`
   display: flex;
   margin-bottom: 4px;
   width: 98px;
-  height: 20px;
+  height: 45px;
   font-size: 12px;
   font-weight: bold;
   color: #f1f1f1;
