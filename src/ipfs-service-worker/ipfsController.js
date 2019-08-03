@@ -2,7 +2,7 @@
 import promisify from 'promisify-es6';
 import mimeTypes from 'mime-types';
 
-import { getReadyNode } from './ipfs';
+import { getReadyNode } from './ipfsNode';
 import { headerOK, headerError } from './headers';
 
 export async function swarmConnect(peerAddress: string) {

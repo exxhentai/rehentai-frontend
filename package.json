@@ -15,6 +15,7 @@
     "ipfs-unixfs": "^0.1.16",
     "mime-types": "^2.1.24",
     "multihashes": "^0.4.15",
+    "preval.macro": "^3.0.0",
     "promisify-es6": "^1.0.3",
     "query-string": "^6.8.2",
     "react": "^16.8.6",
@@ -23,6 +24,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "readable-stream-node-to-web": "^1.0.1",
+    "servertiming": "^1.5.0",
     "stream": "^0.0.2",
     "styled-components": "^4.3.2",
     "styled-flex-component": "^3.0.0"

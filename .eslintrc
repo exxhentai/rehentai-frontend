@@ -35,6 +35,7 @@
     "generator-star-spacing": "off",
     "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": "off",
+    "no-use-before-define": "off",
     "no-console": "off",
     "promise/no-native": "off",
     "no-loop-func": "off",

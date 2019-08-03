@@ -1,4 +1,7 @@
+import packageJSON from '../../package.json';
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
+
 export function splitPath(path) {
   if (path[path.length - 1] === '/') {
     path = path.substring(0, path.length - 1);
@@ -35,4 +38,12 @@ export function joinURLParts(...urls) {
   urls = [].concat(urls.map(url => removeSlashFromBothEnds(url)));
 
   return urls.join('/');
+}
+
+/** check if is gh-page deployed or localhost development */
+export function isListenedRoute(event, route) {
+  return (
+    event.request.url.startsWith(`${packageJSON.homepage}${route}/`) ||
+    event.request.url.startsWith(`${self.location.origin}/${route}/`)
+  );
 }
