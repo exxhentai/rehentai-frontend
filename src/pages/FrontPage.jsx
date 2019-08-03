@@ -50,8 +50,9 @@ const LinkItem = ({ text }) => (
 
 export default function FrontPage() {
   useEffect(() => {
+    // try direct connect to ipfs content server
     fetch(
-      '/ipfsapi/swarmconnect?address=/dns4/lon-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3',
+      '/ipfsapi/swarmconnect?address=/dns4/dev.hmkrl.com/tcp/443/wss/ipfs/QmVti8ZHZ2o1SbieAVz7o2Qzxj8RCanEahGUM1mnajaQTi',
     )
       .then(res => res.json())
       .then(console.log);
@@ -84,7 +85,7 @@ export default function FrontPage() {
 
       <GalleryListThumbnailItem
         title="test"
-        thumbnail="/ipfs/QmXD8TDFDn7kfsmCD2eQ3QWuhLpvj7LB5tbzU44iypdmQ9"
+        thumbnail="/ipfs/QmQmNqkTDWKVA8g8QaGmA1mf481Xdy8eQZPg3gBNoGQRf5"
         id="test"
         createdTime="testtime"
         type="Doujinshi"
