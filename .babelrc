@@ -3,6 +3,7 @@
   "plugins": [
     "babel-plugin-styled-components",
     "babel-plugin-array-last-index",
+    "babel-plugin-lodash",
     "@babel/plugin-proposal-optional-chaining",
     "@babel/plugin-proposal-do-expressions",
     "@babel/plugin-transform-react-inline-elements",
