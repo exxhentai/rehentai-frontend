@@ -1,4 +1,4 @@
-import packageJSON from '../../package.json';
+import { packageJSON } from '../../config';
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 
@@ -46,4 +46,14 @@ export function isListenedRoute(event, route) {
     event.request.url.startsWith(`${packageJSON.homepage}${route}/`) ||
     event.request.url.startsWith(`${self.location.origin}/${route}/`)
   );
+}
+
+export function getParentDirectoryURL(originalParts) {
+  const parts = originalParts.slice();
+
+  if (parts.length > 1) {
+    parts.pop();
+  }
+
+  return ['', 'ipfs'].concat(parts).join('/');
 }

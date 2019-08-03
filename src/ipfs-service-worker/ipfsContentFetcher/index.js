@@ -5,11 +5,11 @@ import readableStreamNodeToWeb from 'readable-stream-node-to-web';
 import mimeTypes from 'mime-types';
 import nodeStream from 'stream';
 
-import { joinURLParts, removeTrailingSlash } from './pathUtil';
+import { joinURLParts, removeTrailingSlash } from '../utils/pathUtil';
 import { resolveDirectory, resolveMultihash } from './resolver';
-import { getReadyNode } from './ipfsNode';
-import { headerOK, headerError, headerNotFound, headerBadRequest } from './headers';
-import config from '../config';
+import { getReadyNode } from '../ipfsNode';
+import { headerOK, headerError, headerNotFound, headerBadRequest } from '../utils/headers';
+import config from '../../config';
 
 /** given a ipfs hash, get that file from ipfs network */
 export async function getFile(path) {
@@ -74,12 +74,12 @@ export function handleGatewayResolverError(ipfs, path, err) {
       case errorToString === 'Error: This dag node is a directory':
         return resolveDirectory(ipfs, path, err.fileName)
           .then(content => {
-            // now content is rendered DOM string
             if (typeof content === 'string') {
-              // no index file found, send rendered directory list DOM string
+              // no index file found, send directory ls
+              // now content is list of contents in the folder, being JSON.stringify
               return new Response(content, {
                 ...headerOK,
-                headers: { 'Content-Type': mimeTypes.contentType('.html') },
+                headers: { 'Content-Type': mimeTypes.contentType('json') },
               });
             }
             // found index file

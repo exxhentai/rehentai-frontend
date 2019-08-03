@@ -4,6 +4,7 @@
     "airbnb",
     "plugin:flowtype/recommended",
     "plugin:jest/recommended",
+    "plugin:you-dont-need-lodash-underscore/compatible",
     "prettier",
     "prettier/flowtype",
     "prettier/react",

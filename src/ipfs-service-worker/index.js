@@ -3,9 +3,9 @@
 
 import qs from 'query-string';
 
-import { isListenedRoute } from './pathUtil';
+import { isListenedRoute } from './utils/pathUtil';
 import { swarmConnect, swarmList } from './ipfsController';
-import { headerNotFound } from './headers';
+import { headerNotFound } from './utils/headers';
 import { getFile } from './ipfsContentFetcher';
 import config from '../config';
 
